@@ -6,8 +6,6 @@ import java.time.Month;
 
 import java.util.Scanner;
 import java.util.Arrays;
-import java.util.List;
-import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -29,7 +27,7 @@ import org.junit.After;
  * @since 04/30/2023
  * @version 1.0
  */
-public class HW6Tester {
+public class Tester {
 
     // A field that represents a test graph
     private Graph<String, String> testGraph;
