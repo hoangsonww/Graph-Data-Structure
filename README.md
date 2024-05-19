@@ -46,3 +46,5 @@ This project is open-source and available under the [MIT license](https://openso
 For any inquiries or contributions, please contact the repository owner.
 
 ---
+
+Created with ❤️ by [Son Nguyen](https://github.com/hoangsonww) in 2023.
