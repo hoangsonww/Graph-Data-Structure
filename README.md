@@ -11,6 +11,7 @@ The Word Ladders game is a Java application that utilizes a Graph data structure
 
 ## Prerequisites
 - Java Development Kit (JDK) 11 or later installed on your machine.
+- A Java IDE (e.g. IntelliJ IDEA or Eclipse) is highly recommended.
 
 ## Setup
 1. Ensure Java is properly installed by running `java -version` in your terminal or command prompt.
@@ -23,6 +24,8 @@ Compile and run the application using the Java compiler and runtime environment:
 javac WordLadders.java
 java WordLadders
 ```
+Alternatively, you can simply run the file(s) directly in your IDE, if supported.
+
 Upon execution, the program prompts you to enter the filename of your desired word list. Valid filenames include `Length3WordGraph` or `LargeWordGraph`, although you can use any text file formatted according to the program's specifications.
 
 After loading the word graph, follow the on-screen instructions to input your starting and ending words, and select the search algorithm (DFS or BFS).
@@ -43,7 +46,7 @@ Contributions to enhance the functionality or performance of the Word Ladders ga
 This project is open-source and available under the [MIT license](https://opensource.org/licenses/MIT).
 
 ## Contact
-For any inquiries or contributions, please contact the repository owner.
+For any inquiries or contributions, please contact the repository owner, [Son Nguyen](https://github.com/hoangsonww).
 
 ---
 
