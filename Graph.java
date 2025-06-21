@@ -402,12 +402,9 @@ public class Graph<K, V> {
     public static <V> Graph<String, V> read(String filename) {
         // Create a new empty graph to construct from the given, specified file
         Graph<String, V> graphToBeConstructed = new Graph<String, V>();
-        // Try-catch block to detect possible IOException from invalid file or filename
-        try {
-            // A variable of type FileReader to open the file and read it to the program with the given filename
-            FileReader fileReaderForGivenFileName = new FileReader(filename);
-            // A variable of type BufferedReader to create a buffered reader to read the file line by line
-            BufferedReader bufferedReaderForGivenFileName = new BufferedReader(fileReaderForGivenFileName);
+        // Try-with-resources to ensure the BufferedReader (and its FileReader) are closed
+        try (FileReader fileReaderForGivenFileName = new FileReader(filename);
+             BufferedReader bufferedReaderForGivenFileName = new BufferedReader(fileReaderForGivenFileName)) {
             // A variable to store each line in the file
             String everySingleLineInFile = new String();
             // A loop that loops through all lines in the file to read them and construct nodes in the graph from them
@@ -433,7 +430,7 @@ public class Graph<K, V> {
                 }
             }
         }
-        // If any Exception type is caught, print its message to System.out
+        // If any IOException is caught, print its message to System.out
         catch (IOException exception) {
             // If there's an error reading the file, print error messages to System.out
             System.out.println("Unfortunately, there is an error reading this file: " + exception.getMessage());
