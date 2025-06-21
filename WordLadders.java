@@ -190,79 +190,74 @@ public class WordLadders {
          * progress of the reading process
          */
         int notificationForEvery1000LinesProcessed = 1000;
-        // Try-catch block to detect possible IOException from invalid file or filename
-        try {
-            // A variable of type FileReader to open the file and read it to the program with the given filename
-            FileReader fileReaderForGivenFileName = new FileReader(filename);
-            // A variable of type BufferedReader to create a buffered reader to read the file line by line
-            BufferedReader bufferedReaderForGivenFileName = new BufferedReader(fileReaderForGivenFileName);
+    
+        // Try-with-resources to ensure the FileReader and BufferedReader are closed
+        try (FileReader fileReaderForGivenFileName = new FileReader(filename);
+             BufferedReader bufferedReaderForGivenFileName = new BufferedReader(fileReaderForGivenFileName)) {
+    
             // A variable that stores the index for adding the neighbors to the graph
             int indexForAddingNeighborsToGraph = 1;
             // A variable to store each line in the file
             String everySingleLineInFile = new String();
+    
             // A loop that loops through all lines in the file to read them and construct nodes in the graph from them
             while ((everySingleLineInFile = bufferedReaderForGivenFileName.readLine()) != null) {
-                // Increment the numLinesProcessed variable by 1 for every line processed
+                // Increment the numberOfLinesProcessed variable by 1 for every line processed
                 numberOfLinesProcessed = numberOfLinesProcessed + 1;
-                // Provide the user with a notification update of the process for each 1,000 lines processed
+    
+                // Provide the user with a notification update for each 1,000 lines processed
                 if ((numberOfLinesProcessed % notificationForEvery1000LinesProcessed) == 0) {
-                    // Updates the user by printing to System.out with the number of lines processed
                     System.out.println("We've processed " + numberOfLinesProcessed + " lines. Please wait...");
+                } else {
+                    // no-op
                 }
-                // Otherwise, let the method continue as normal
-                else {
-                    ;
-                }
+    
                 /*
-                 * For each 20,000 lines processed, notify them that the program is still processing their request and
-                 * ask them to wait for a bit more~
+                 * For each 10,000 lines processed, notify them that the program is still processing their request
                  */
                 if ((numberOfLinesProcessed % 10000) == 0) {
                     System.out.println("This file is a fairly large one. Please hold on and we'll get it ready soon!");
+                } else {
+                    // no-op
                 }
-                // Otherwise, let the method continue as normal
-                else {
-                    ;
-                }
+    
                 /*
                  * Now, split the line into an array of strings using whitespace as the delimiter and store it in a variable
-                 * of type String. For example, the resulting String[] array will now contain: [nodename1, nodedata1,
-                 * neighbor1, neighbor2, neighbor3, and so on]:
+                 * of type String. For example: [nodename1, nodedata1, neighbor1, neighbor2, ...]
                  */
                 String[] splitLinesInFile = everySingleLineInFile.split(" ");
+    
                 /*
-                 * If the split line's length is smaller than the index variable above, skip this iteration and goes
-                 * onto the next
+                 * If the split line's length is smaller than the index variable above, skip this iteration
                  */
                 if (splitLinesInFile.length < indexForAddingNeighborsToGraph) {
                     continue;
+                } else {
+                    // no-op
                 }
-                // Otherwise, let the method continue as normal
-                else {
-                    ;
-                }
+    
                 // A variable that reads the current split line in the file
                 String currentSplitLineInFile = splitLinesInFile[0];
-                // A variable that represents and stores the key of the current split line and its associated node
+                // A variable that represents the key of the current node
                 Integer keyOfCurrentNode = Integer.parseInt(currentSplitLineInFile);
-                // A variable that represents and stores the value of the current node
+                // A variable that represents the value of the current node
                 String valueOfCurrentNode = splitLinesInFile[1];
+    
                 // Add the above pair of key and value to the graph to be constructed
                 graphConstructedForGivenFile.addNode(keyOfCurrentNode, valueOfCurrentNode);
-                // Add the above pair of key and value to the hashtable for the word graph to be constructed
+                // Add the above pair to the hashtable for the word graph
                 hashTableForWordGraph.put(valueOfCurrentNode, keyOfCurrentNode);
-                // A loop that iterates through the split lines read from the file and add the neighbors of the current nodes
+    
+                // A loop that iterates through the split lines and adds the neighbors of the current node
                 for (int index = (indexForAddingNeighborsToGraph) + 1; index < splitLinesInFile.length; index = index + 1) {
                     // A variable that stores the current line being read from the file
                     String currentLineInFile = splitLinesInFile[index];
-                    // A variable that stores the values of the neighbor nodes of the current node
+                    // A variable that stores the values of the neighbor nodes
                     Integer valueOfNeighborNodeOfCurrentNode = Integer.parseInt(currentLineInFile);
-                    // Add the edges between them to the graph above
+                    // Add the edge between them to the graph above
                     graphConstructedForGivenFile.addEdge(keyOfCurrentNode, valueOfNeighborNodeOfCurrentNode);
                 }
             }
-            // Stops and closes the reader for the file as the reading operation is now complete
-            bufferedReaderForGivenFileName.close();
         }
         // If an IOException is caught, prompts the user that the given file is invalid
         catch (IOException exception) {
